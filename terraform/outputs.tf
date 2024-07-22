@@ -16,6 +16,7 @@ output "acr_admin_password" {
 }
 
 # VM Outputs
+#   Refs: https://developer.hashicorp.com/terraform/language/functions/nonsensitive
 output "vm_public_ip_address" {
   value = "${azurerm_public_ip.myPublicIp1.ip_address}"
 }

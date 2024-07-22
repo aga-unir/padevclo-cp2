@@ -4,6 +4,12 @@ variable "location"{
     default = "West Europe"
 }
 
+variable "akslocation"{
+    type = string
+    description  = "Región Azure dónde se creará la infraestructura"
+    default = "Spain Central"
+}
+
 variable "environment"{
   type = string
   description = "Tag de entorno"

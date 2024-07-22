@@ -4,7 +4,7 @@ terraform {
   required_providers {
     azurerm = {
       source = "hashicorp/azurerm"
-      version = "3.0.0"
+      version = "3.94.0"
     }
   }
 }
@@ -19,5 +19,10 @@ provider "azurerm" {
 resource "azurerm_resource_group" "rg" {
   name     = "UNIR"
   location = var.location
+}
+
+resource "azurerm_resource_group" "rgaks" {
+  name     = "UNIRAKS"
+  location = var.akslocation
 }
 

@@ -1,5 +1,6 @@
 ---
-- name: Desplegamos aplicación Podman
+- name: Desplegamos aplicación Podman 
+  # https://docs.ansible.com/ansible/latest/collections/containers/podman/
   hosts: myVM1
   become: yes
   vars:
@@ -41,3 +42,33 @@
     - name: Mostrar información contenedores
       debug:
         var: podman_containers.containers
+
+- name: Desplegamos sobre Kubernetes
+  hosts: localhost
+  gather_facts: false
+  vars:
+    kubeconfig_file: ../terraform/kubeconfig-akscp2
+    namespace_name: agak8scp2
+  tasks:
+    - name: Creamos K8S namespace
+      kubernetes.core.k8s:
+        kubeconfig: "{{ kubeconfig_file }}"
+        name:  "{{ namespace_name }}"
+        api_version: v1
+        kind: Namespace
+        state: present
+    - name: Crear Backend
+      kubernetes.core.k8s:
+        kubeconfig: "{{ kubeconfig_file }}"
+        namespace:  "{{ namespace_name }}"
+        src: aks-azure-vote-back.yml
+        state: present
+        apply: true
+
+    - name: Crear Frontend
+      kubernetes.core.k8s:
+        kubeconfig: "{{ kubeconfig_file }}"
+        namespace:  "{{ namespace_name }}"
+        src: aks-azure-vote-back.yml
+        state: present
+        apply: true
