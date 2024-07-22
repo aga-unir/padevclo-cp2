@@ -1,0 +1,5 @@
+az-vm:
+  hosts:
+    myVM1:
+      ansible_host: 20.16.227.33
+      ansible_user: adminuser

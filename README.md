@@ -37,3 +37,10 @@
 ```
   ssh -i ~/.ssh/id_rsa_azcp2 adminuser@<public_ip>
 ```
+
+## Quick Reference: Ansible
+
+```
+  ansible-vault encrypt_string 'acr_admin_password' --name 'acr_admin_password'
+```
+

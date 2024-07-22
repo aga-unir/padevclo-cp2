@@ -1,0 +1,43 @@
+---
+- name: Desplegamos aplicación Podman
+  hosts: myVM1
+  become: yes
+  vars:
+    ansible_ssh_private_key_file: ~/.ssh/id_rsa_azcp2
+    acr_registry_username: "agadevops"
+    acr_registry: "agadevops.azurecr.io"
+    acr_admin_password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          38353035643136343839396137326564333663653134663130323333373131343639353463373639
+          3833623436663066666463323838636233613539623539630a316631653031323632663661356131
+          32356336393266396639373837313931653930383361326233393664353836303162656235333032
+          6363343363653733300a666663303539643064376362316239666134376566316162646562356433
+          30353864396130373030396665306330323361633761323464393338366136613764353764353666
+          65326464323237336332353965303262653535346637613036636161656238306162383566643232
+          303834303433393532326538333039303934
+  tasks:
+    - name: Actualizamos lista paqueteria disponible
+      apt:
+        update_cache: yes
+    - name: Instalamos Podman 
+      package:
+        name: podman
+        state: present
+    - name: Login en AzRegistry
+      containers.podman.podman_login:
+        username: "{{ acr_registry_username }}"
+        password: "{{ acr_admin_password }}"
+        registry: "{{ acr_registry }}"
+    - name: Ejecutar Ngnix
+      containers.podman.podman_container:
+        name: nginx
+        image: agadevops.azurecr.io/nginx:casopractico2
+        state: started
+        ports:
+          - "80:80"
+    - name: Obtener información contenedores
+      containers.podman.podman_container_info:
+      register: podman_containers
+    - name: Mostrar información contenedores
+      debug:
+        var: podman_containers.containers
