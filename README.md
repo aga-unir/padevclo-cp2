@@ -23,9 +23,9 @@
 ```
 
 ```
-  skopeo copy docker://docker.io/nginx:latest docker://agadevops.azurecr.io/nginx:casopractico2
-  skopeo copy docker://mcr.microsoft.com/azuredocs/azure-vote-front:v1 docker://agadevops.azurecr.io/aks/azure-vote-front:casopractico2
-  skopeo copy docker://mcr.microsoft.com/oss/bitnami/redis:6.0.8 docker://agadevops.azurecr.io/aks/redis:casopractico2
+  skopeo copy docker://docker.io/nginx:latest docker://agadevops.azurecr.io/unir/vm/nginx:casopractico2
+  skopeo copy docker://mcr.microsoft.com/azuredocs/azure-vote-front:v1 docker://agadevops.azurecr.io/unir/aks/azure-vote-front:casopractico2
+  skopeo copy docker://mcr.microsoft.com/oss/bitnami/redis:6.0.8 docker://agadevops.azurecr.io/unir/aks/redis:casopractico2
 ```
 
 [Terraform Doc](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs)
@@ -44,10 +44,6 @@
 
 ```
   ansible-vault encrypt_string 'acr_admin_password' --name 'acr_admin_password'
-```
-
-```
-  
 ```
 
 ## Quick Reference: K8S

@@ -32,7 +32,7 @@
     - name: Ejecutar Ngnix
       containers.podman.podman_container:
         name: nginx
-        image: agadevops.azurecr.io/nginx:casopractico2
+        image: agadevops.azurecr.io/unir/vm/nginx:casopractico2
         state: started
         ports:
           - "80:80"
