@@ -15,3 +15,7 @@ output "acr_admin_password" {
     value = nonsensitive(azurerm_container_registry.acr.admin_password)
 }
 
+# VM Outputs
+output "vm_public_ip_address" {
+  value = "${azurerm_public_ip.myPublicIp1.ip_address}"
+}
