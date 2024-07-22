@@ -11,6 +11,10 @@
 ```
 
 ```
+  terraform plan
+```
+
+```
   terraform apply
 ```
 
@@ -20,4 +24,16 @@
 
 ```
   skopeo copy docker://docker.io/nginx:latest docker://agadevops.azurecr.io/nginx:casopractico2
+```
+
+[Terraform Doc](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs)
+
+## Quick Reference: SSH
+
+```
+  ssh-keygen -t rsa
+```
+
+```
+  ssh -i ~/.ssh/id_rsa_azcp2 adminuser@<public_ip>
 ```

@@ -14,3 +14,4 @@ output "acr_admin_password" {
     #sensitive = true
     value = nonsensitive(azurerm_container_registry.acr.admin_password)
 }
+
