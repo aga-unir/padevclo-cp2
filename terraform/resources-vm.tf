@@ -69,7 +69,7 @@ resource "azurerm_network_interface" "myNic1" {
 # Creamos Security Group
 #   Ref: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_security_group
 resource "azurerm_network_security_group" "mySecurityGroup" {
-  name = "sshtraffic" 
+  name = "vmsecrules" 
   resource_group_name = azurerm_resource_group.rg.name
   location = azurerm_resource_group.rg.location
  
@@ -81,6 +81,18 @@ resource "azurerm_network_security_group" "mySecurityGroup" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "22"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+  
+  security_rule {
+    name                       = "APP"
+    priority                   = 1002
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "80"
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
